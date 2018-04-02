@@ -26,7 +26,7 @@ var Network = /** @class */ (function () {
         if (fn > this.nodeSize) {
             fn = Data.network.NODE_OUTPUT;
         }
-        if (sn > fn) {
+        if (sn > fn && fn != Data.network.NODE_OUTPUT) {
             var temp = sn;
             sn = fn;
             fn = temp;
@@ -44,11 +44,12 @@ var Network = /** @class */ (function () {
             this._addEdge(sn, fn);
         }
     };
-    Network.prototype.getOutput = function (pipeDistance, pipeUpperPosition) {
+    Network.prototype.getOutput = function (pipeDistance, pipeUpperPosition, pipe2Upper) {
         // Initialize the value of nodes
         this.nodes[Data.network.NODE_BIAS] = 1;
         this.nodes[Data.network.NODE_PIPE_DIS] = pipeDistance;
         this.nodes[Data.network.NODE_PIPE_UPPER] = pipeUpperPosition;
+        this.nodes[Data.network.NODE_PIPE2_UPPER] = pipe2Upper;
         this.nodes[Data.network.NODE_OUTPUT] = 0;
         for (var inputIdx = Data.network.INPUT_SIZE + 1; inputIdx <= this.nodeSize; inputIdx++) {
             this.nodes[inputIdx] = 0;

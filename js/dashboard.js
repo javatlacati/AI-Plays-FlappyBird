@@ -6,6 +6,8 @@ var Dashboard = /** @class */ (function () {
         this._popSize = document.getElementById("pop-size");
         this._surviveRate = document.getElementById("survive-rate");
         this._mutateChance = document.getElementById("mutate-chance");
+        this._activationFunction = document.getElementById("activation-function");
+        this._scrollSpeed = document.getElementById("scroll-speed");
         this._simSpeed = document.getElementById("sim-speed");
         this._enableAnimation.checked = true;
         this._showPipe.checked = true;
@@ -21,6 +23,9 @@ var Dashboard = /** @class */ (function () {
         };
         this._showPipe.onchange = function () {
             self.showPipe = !self.showPipe;
+        };
+        this._scrollSpeed.onchange = function () {
+            Data.game.MOVE_SPEED = Number(self._scrollSpeed.options[self._scrollSpeed.selectedIndex].value);
         };
         this._simSpeed.onchange = function () {
             game.setTimer();
@@ -72,7 +77,13 @@ var Dashboard = /** @class */ (function () {
         td = document.createElement("td");
         td.appendChild(document.createTextNode(bestBird.score));
         tr.appendChild(td);
+        // td = document.createElement("td");
+        // td.appendChild(document.createTextNode(bestBird.network.constructor.name.replace(/(.+)ActivationNetwork/g, "$1")));
+        // tr.appendChild(td);
         table.appendChild(tr);
+        // Auto scroll table
+        var historyDiv = document.getElementById("history-div");
+        historyDiv.scrollTop = historyDiv.scrollHeight;
     };
     Dashboard.prototype.getSurvivorNum = function () {
         var surviveRate = this._surviveRate;
@@ -85,6 +96,9 @@ var Dashboard = /** @class */ (function () {
     Dashboard.prototype.getMutateChance = function () {
         var mutateChance = this._mutateChance;
         return Number(mutateChance.options[mutateChance.selectedIndex].value);
+    };
+    Dashboard.prototype.getActivationFunction = function () {
+        return this._activationFunction.options[this._activationFunction.selectedIndex].value;
     };
     Dashboard.prototype.getSimSpeed = function () {
         var simulationSpeed = this._simSpeed;

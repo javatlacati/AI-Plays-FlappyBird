@@ -1,11 +1,15 @@
 ///<reference path="bird.ts"/>
 ///<reference path="data.ts"/>
+///<reference path="network/sigmoid_network.ts"/>
+///<reference path="network/hyperbolic_tangent_network.ts"/>
+///<reference path="network/custom_tangent_network.ts"/>
 var Generation = /** @class */ (function () {
     function Generation() {
         this.generationNum = 1;
         this._birds = [];
         for (var i = 0; i < Data.generation.BIRD_NUM; i++) {
             this._birds[i] = new Bird();
+            this._birds[i].network = new CustomTangentActivationNetwork();
             this._birds[i].network.mutate(); // Make the birds different from each other
         }
     }
@@ -18,6 +22,23 @@ var Generation = /** @class */ (function () {
     });
     Generation.prototype._breed = function (birdA, birdB) {
         var baby = new Bird();
+        switch (dashboard.getActivationFunction()) {
+            case Data.activation.SIGMOID:
+                baby.network = new SigmoidalActivationNetwork();
+                break;
+            case Data.activation.ACRTAN:
+                baby.network = new ArcTanActivationNetwork();
+                break;
+            case Data.activation.HYPERBOLIC_TANGENT:
+                baby.network = new HyperbolicTangentActivationNetwork();
+                break;
+            case Data.activation.RELU:
+                baby.network = new ReLuActivationNetwork();
+                break;
+            default:
+                baby.network = new CustomTangentActivationNetwork();
+        }
+        // baby.network._activationFunction=Activation.get(dashboard.getActivationFunction());
         var parentA;
         var parentB;
         if (this._birds[birdA].fitness < this._birds[birdB].fitness) {
@@ -59,6 +80,7 @@ var Generation = /** @class */ (function () {
             this._birds[i] = null;
             delete this._birds[i];
         }
+        Data.generation.SURVIVOR_NUM = Math.min(Data.generation.SURVIVOR_NUM, Data.generation.BIRD_NUM);
         for (var birdToBeKilledIdx = Data.generation.SURVIVOR_NUM; birdToBeKilledIdx < Data.generation.BIRD_NUM; birdToBeKilledIdx++) {
             this._birds[birdToBeKilledIdx] = this._breed(Math.floor(Math.random() * Data.generation.SURVIVOR_NUM), Math.floor(Math.random() * Data.generation.SURVIVOR_NUM));
         }

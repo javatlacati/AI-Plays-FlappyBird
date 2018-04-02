@@ -9,6 +9,8 @@ class Dashboard {
     private enableAnimation: boolean;
     private showPipe: boolean;
     private simSpeed: number;
+    private _activationFunction: HTMLSelectElement | null;
+    private _scrollSpeed: HTMLSelectElement | null;
 
     constructor() {
         this._enableAnimation = <HTMLInputElement>document.getElementById("enable-animation");
@@ -16,6 +18,8 @@ class Dashboard {
         this._popSize = <HTMLSelectElement>document.getElementById("pop-size");
         this._surviveRate = <HTMLSelectElement>document.getElementById("survive-rate");
         this._mutateChance = <HTMLSelectElement>document.getElementById("mutate-chance");
+        this._activationFunction = <HTMLSelectElement>document.getElementById("activation-function");
+        this._scrollSpeed = <HTMLSelectElement>document.getElementById("scroll-speed");
         this._simSpeed = <HTMLSelectElement>document.getElementById("sim-speed");
 
         this._enableAnimation.checked = true;
@@ -34,6 +38,9 @@ class Dashboard {
         };
         this._showPipe.onchange = function () {
             self.showPipe = !self.showPipe;
+        };
+        this._scrollSpeed.onchange = function () {
+            Data.game.MOVE_SPEED = Number(self._scrollSpeed.options[self._scrollSpeed.selectedIndex].value);
         };
         this._simSpeed.onchange = function () {
             game.setTimer();
@@ -98,7 +105,14 @@ class Dashboard {
         td.appendChild(document.createTextNode(bestBird.score));
         tr.appendChild(td);
 
+        // td = document.createElement("td");
+        // td.appendChild(document.createTextNode(bestBird.network.constructor.name.replace(/(.+)ActivationNetwork/g, "$1")));
+        // tr.appendChild(td);
+
         table.appendChild(tr);
+        // Auto scroll table
+        let historyDiv = document.getElementById("history-div");
+        historyDiv.scrollTop = historyDiv.scrollHeight;
     }
 
     public getSurvivorNum(): number {
@@ -114,6 +128,10 @@ class Dashboard {
     public getMutateChance(): number {
         const mutateChance = this._mutateChance;
         return Number(mutateChance.options[mutateChance.selectedIndex].value);
+    }
+
+    public getActivationFunction():string {
+        return this._activationFunction.options[this._activationFunction.selectedIndex].value;
     }
 
     public getSimSpeed() {

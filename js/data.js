@@ -7,8 +7,9 @@ Data.network = {
     NODE_BIAS: 1,
     NODE_PIPE_DIS: 2,
     NODE_PIPE_UPPER: 3,
-    NODE_OUTPUT: 20,
-    INPUT_SIZE: 3,
+    NODE_PIPE2_UPPER: 4,
+    NODE_OUTPUT: 0,
+    INPUT_SIZE: 4,
     STEP_SIZE: 0.1,
     ADD_NODE_CHANCE: 0.5
 };
@@ -33,7 +34,7 @@ Data.animation = {
     SCORE_SPACE: 2
 };
 Data.game = {
-    PIPE_NUM: 2,
+    PIPE_NUM: 3,
     PIPE_WIDTH: 52,
     PIPE_HEIGHT: 500,
     PIPE_MIN_Y: 100,
@@ -42,8 +43,8 @@ Data.game = {
     BIRD_INIT_X: 100,
     BIRD_INIT_Y: 200,
     BIRD_RADIUS: 12,
-    GRAVITY: 0.25,
-    FLY_SPEED: 5.25,
-    MOVE_SPEED: 2.25,
+    GRAVITY: 0.4,
+    FLY_SPEED: 5.5,
+    MOVE_SPEED: 2,
     LAND_Y: 495
 };

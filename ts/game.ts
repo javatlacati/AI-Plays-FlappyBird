@@ -60,7 +60,7 @@ class Game{
         for (var pipeIdx = 0; pipeIdx < Data.game.PIPE_NUM; pipeIdx++) {
             this.pipeX[pipeIdx] -= Data.game.MOVE_SPEED;
             if (this.pipeX[pipeIdx] <= -Data.game.PIPE_WIDTH) {
-                this.pipeX[pipeIdx] = Data.animation.SCREEN_WIDTH;
+                this.pipeX[pipeIdx] = (Data.animation.SCREEN_WIDTH + Data.game.PIPE_WIDTH) * 0.5 * Data.game.PIPE_NUM - Data.game.PIPE_WIDTH;
                 this.pipeUpper[pipeIdx] = this._getNewPipeY();
             }
         }
@@ -79,8 +79,9 @@ class Game{
     }
 
     private moveBirds() {
-        for (var birdIdx = 0; birdIdx < Data.generation.BIRD_NUM; birdIdx++) {
-            this.generation.birds[birdIdx].fly(this.pipeX[this.nextPipe] - Data.game.BIRD_INIT_X, this.pipeUpper[this.nextPipe]);
+        let next2Pipe = (this.nextPipe + 1) % Data.game.PIPE_NUM;
+        for (let birdIdx = 0; birdIdx < Data.generation.BIRD_NUM; birdIdx++) {
+            this.generation.birds[birdIdx].fly(this.pipeX[this.nextPipe] - Data.game.BIRD_INIT_X, this.pipeUpper[this.nextPipe],this.pipeUpper[next2Pipe]);
             if (this.generation.birds[birdIdx].alive) {
                 this.moveAliveBird(birdIdx);
             }
