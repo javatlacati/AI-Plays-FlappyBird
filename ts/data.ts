@@ -40,6 +40,13 @@ class Data {
         MOVE_SPEED: number;
         LAND_Y: number
     };
+    static activation: {
+        SIGMOID: string;
+        ACRTAN: string;
+        CUSTOM_TANGENT: string;
+        HYPERBOLIC_TANGENT: string;
+        RELU: string
+    };
 }
 
 Data.network = {
@@ -52,6 +59,14 @@ Data.network = {
 
     STEP_SIZE: 0.1,
     ADD_NODE_CHANCE: 0.5
+};
+
+Data.activation = {
+    SIGMOID: "sigmoid",
+    ACRTAN: "arctan",
+    CUSTOM_TANGENT: "custom",
+    HYPERBOLIC_TANGENT: "hyperbolic",
+    RELU: "relu"
 };
 
 Data.generation = {

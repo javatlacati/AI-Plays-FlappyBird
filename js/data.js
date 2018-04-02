@@ -12,6 +12,13 @@ Data.network = {
     STEP_SIZE: 0.1,
     ADD_NODE_CHANCE: 0.5
 };
+Data.activation = {
+    SIGMOID: "sigmoid",
+    ACRTAN: "arctan",
+    CUSTOM_TANGENT: "custom",
+    HYPERBOLIC_TANGENT: "hyperbolic",
+    RELU: "relu"
+};
 Data.generation = {
     BIRD_NUM: 15,
     SURVIVOR_NUM: 5,
