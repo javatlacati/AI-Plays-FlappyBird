@@ -11,8 +11,10 @@ class Bird {
     y: number;
     speed: number;
     alive: boolean;
+    private seeTwoPipe: boolean;
 
     constructor() {
+        this.seeTwoPipe = dashboard.seeTwoPipe; // Foresee the next coming two pipes instead of one
         this.init();
     }
 
@@ -30,7 +32,7 @@ class Bird {
         if (this.alive) {
             this._fitness++;
             if (this.network.getOutput(PipeDistance / Data.animation.SCREEN_WIDTH, (this.y - pipeUpper) / Data.animation.SCREEN_HEIGHT,
-            (this.y - pipe2Upper) / Data.animation.SCREEN_HEIGHT)) {
+                this.seeTwoPipe ? (this.y - pipe2Upper) / Data.animation.SCREEN_HEIGHT : 0)) {
                 this.speed = -Data.game.FLY_SPEED;
             }
         }

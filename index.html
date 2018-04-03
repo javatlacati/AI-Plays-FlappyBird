@@ -79,6 +79,19 @@
             </div>
 
             <hr>
+            <div>
+                <input type="checkbox" id="see-two-pipe"/>**Foresee Next Two Pipes (instead of one)
+            </div>
+            <div>
+                **Activation
+                <select id="activation-function">
+                    <option value="custom">Custom Tangent</option>
+                    <option value="arctan">Arctan</option>
+                    <option value="hyperbolic">Hyperbolic Tangent</option>
+                    <option value="sigmoid">Sigmoid</option>
+                    <option value="relu">ReLu</option>
+                </select>
+            </div>
 
             <div>
                 *Population Size
@@ -114,14 +127,6 @@
                     <option value="0.6">60%</option>
                     <option value="0.7">70%</option>
                 </select><br><br>
-                **Activation
-                <select id="activation-function">
-                    <option value="custom">Custom Tangent</option>
-                    <option value="arctan">Arctan</option>
-                    <option value="hyperbolic">Hyperbolic Tangent</option>
-                    <option value="sigmoid">Sigmoid</option>
-                    <option value="relu">ReLu</option>
-                </select>
             </div>
 
             <hr>
@@ -153,7 +158,7 @@
             the last generation. Blue birds are new-born birds.
             <br><br>
             Note: The changes of the "*" options will be effective only after the current generation
-            is over; The changes of the "**" operations will be effective only for new-born birds.
+            is over; The changes of the "**" options will be effective only for new-born birds.
         </div>
 
     </div>

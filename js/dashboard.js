@@ -6,6 +6,7 @@ var Dashboard = /** @class */ (function () {
         this._popSize = document.getElementById("pop-size");
         this._surviveRate = document.getElementById("survive-rate");
         this._mutateChance = document.getElementById("mutate-chance");
+        this._seeTwoPipe = document.getElementById("see-two-pipe");
         this._activationFunction = document.getElementById("activation-function");
         this._scrollSpeed = document.getElementById("scroll-speed");
         this._simSpeed = document.getElementById("sim-speed");
@@ -16,6 +17,7 @@ var Dashboard = /** @class */ (function () {
         this._simSpeed.options[2].selected = true;
         this.enableAnimation = true;
         this.showPipe = true;
+        this.seeTwoPipe = false;
         this.simSpeed = 12;
         var self = this;
         this._enableAnimation.onchange = function () {
@@ -23,6 +25,9 @@ var Dashboard = /** @class */ (function () {
         };
         this._showPipe.onchange = function () {
             self.showPipe = !self.showPipe;
+        };
+        this._seeTwoPipe.onchange = function () {
+            self.seeTwoPipe = !self.seeTwoPipe;
         };
         this._scrollSpeed.onchange = function () {
             Data.game.MOVE_SPEED = Number(self._scrollSpeed.options[self._scrollSpeed.selectedIndex].value);

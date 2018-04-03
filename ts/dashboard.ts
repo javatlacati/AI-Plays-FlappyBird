@@ -11,6 +11,8 @@ class Dashboard {
     private simSpeed: number;
     private _activationFunction: HTMLSelectElement | null;
     private _scrollSpeed: HTMLSelectElement | null;
+    private _seeTwoPipe: HTMLInputElement | null;
+    private seeTwoPipe: boolean;
 
     constructor() {
         this._enableAnimation = <HTMLInputElement>document.getElementById("enable-animation");
@@ -18,6 +20,7 @@ class Dashboard {
         this._popSize = <HTMLSelectElement>document.getElementById("pop-size");
         this._surviveRate = <HTMLSelectElement>document.getElementById("survive-rate");
         this._mutateChance = <HTMLSelectElement>document.getElementById("mutate-chance");
+        this._seeTwoPipe = <HTMLInputElement>document.getElementById("see-two-pipe");
         this._activationFunction = <HTMLSelectElement>document.getElementById("activation-function");
         this._scrollSpeed = <HTMLSelectElement>document.getElementById("scroll-speed");
         this._simSpeed = <HTMLSelectElement>document.getElementById("sim-speed");
@@ -30,6 +33,7 @@ class Dashboard {
 
         this.enableAnimation = true;
         this.showPipe = true;
+        this.seeTwoPipe = false;
         this.simSpeed = 12;
 
         var self = this;
@@ -38,6 +42,9 @@ class Dashboard {
         };
         this._showPipe.onchange = function () {
             self.showPipe = !self.showPipe;
+        };
+        this._seeTwoPipe.onchange = function () {
+            self.seeTwoPipe = !self.seeTwoPipe;
         };
         this._scrollSpeed.onchange = function () {
             Data.game.MOVE_SPEED = Number(self._scrollSpeed.options[self._scrollSpeed.selectedIndex].value);
@@ -130,7 +137,7 @@ class Dashboard {
         return Number(mutateChance.options[mutateChance.selectedIndex].value);
     }
 
-    public getActivationFunction():string {
+    public getActivationFunction(): string {
         return this._activationFunction.options[this._activationFunction.selectedIndex].value;
     }
 
